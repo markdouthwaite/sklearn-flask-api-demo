@@ -1,4 +1,4 @@
-# minimal-flask-api
+# Scikit-Learn Flask API
 
 This [template repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template)
  provides a minimal configuration for a 'production-ready' Flask API 
