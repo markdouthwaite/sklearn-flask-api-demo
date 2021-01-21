@@ -1,7 +1,7 @@
 # Scikit-Learn Flask API
 
 This [template repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template)
- provides a minimal configuration for a 'production-ready' Flask API 
+ provides a minimal configuration for a 'production-ready' Flask API Scikit-Learn
 project. It includes a basic project structure and 'seed' files for functional and 
 non-function testing, a basic application structure (including error-handling 
 blueprint), and a few assorted 'getting started' files too.
