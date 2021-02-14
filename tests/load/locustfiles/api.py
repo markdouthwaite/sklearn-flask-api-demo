@@ -7,10 +7,6 @@ class DefaultUser(HttpUser):
     wait_time = between(1, 5)
 
     @task
-    def index(self):
-        self.client.get("/")
-
-    @task
     def check_health(self):
         with self.client.get("/health", catch_response=True) as response:
             if response.text != "OK":
