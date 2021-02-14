@@ -1,0 +1,11 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker build -t gcr.io/$PROJECT_ID/sklearn-demo .']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/sklearn-demo']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: ['run', 'deploy', 'sklearn-demo', '--image', 'gcr.io/$PROJECT_ID/sklearn-demo', '--platform', 'managed', '--region', 'europe-west1', '--allow-unauthenticated']
+images:
+  - "gcr.io/$PROJECT_ID/sklearn-demo"

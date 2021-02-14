@@ -3,7 +3,6 @@ from flask import Flask, Response, request
 from .errors import errors
 from .handlers import predict as predict_handler
 
-
 app = Flask(__name__)
 app.register_blueprint(errors)
 
@@ -13,10 +12,9 @@ def predict():
     return predict_handler(request)
 
 
+# feel free to add as many handlers in here as you like!
+
+
 @app.route("/health")
 def health():
     return Response("OK", status=200)
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)

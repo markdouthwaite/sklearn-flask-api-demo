@@ -1,20 +1,20 @@
-import time
 import json
+import os
+import time
 from datetime import datetime
-from typing import Optional, List, Any
+from typing import Any, List, Optional
 
 import fire
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, roc_auc_score
-
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 np.random.seed(42)
 
@@ -67,6 +67,8 @@ def create_pipeline(
 
 def train(
     path: str,
+    model_path: str = os.getenv("MODEL_PATH", "data/pipeline.pkl"),
+    metrics_path: str = os.getenv("METRICS_PATH", "data/metrics.json"),
     test_size: float = 0.2,
     dump: bool = True,
     categorical_features: Optional[List[str]] = None,
@@ -117,8 +119,8 @@ def train(
     )
 
     if dump:
-        joblib.dump(model, "data/pipeline.joblib")
-        json.dump(metrics, open("data/metrics.json", "w"))
+        joblib.dump(model, model_path)
+        json.dump(metrics, open(metrics_path, "w"))
 
 
 if __name__ == "__main__":

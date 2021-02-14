@@ -1,14 +1,17 @@
 FROM python:3.7.8-slim
 
-EXPOSE 5000
+COPY requirements/common.txt requirements/common.txt
+RUN pip install -U pip && pip install -r requirements/common.txt
+
+COPY ./api /app/api
+COPY ./bin /app/bin
+COPY ./data /app/data
+COPY wsgi.py /app/wsgi.py
+WORKDIR /app
 
 RUN useradd demo
+USER demo
 
-COPY requirements requirements
-RUN pip install -U pip && pip install -r requirements/core.txt
-
-COPY ./src /app/src
-COPY ./bin /app/bin
-WORKDIR /app
+EXPOSE 8080
 
 ENTRYPOINT ["bash", "/app/bin/run.sh"]
