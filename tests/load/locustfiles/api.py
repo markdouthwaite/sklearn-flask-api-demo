@@ -10,4 +10,6 @@ class DefaultUser(HttpUser):
     def check_health(self):
         with self.client.get("/health", catch_response=True) as response:
             if response.text != "OK":
-                response.failure("Wrong response.")
+                response.failure(
+                    f"Wrong response. (status_code={response.status_code})"
+                )

@@ -29,3 +29,6 @@ test:
 
 load-test:
 	@locust -f tests/load/locustfiles/api.py
+
+gcloud-deploy:
+	@gcloud builds submit

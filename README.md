@@ -105,7 +105,7 @@ docker build . -t flask-app
 To launch the containerised app, run:
 
 ```bash
-docker run -p 5000:5000 flask-app
+docker run -p 8080:8080 flask-app
 ```
 
 You should see your server boot up, and should be accessible as before!
