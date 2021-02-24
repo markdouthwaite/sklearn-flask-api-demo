@@ -12,9 +12,6 @@ def predict():
     return predict_handler(request)
 
 
-# feel free to add as many handlers in here as you like!
-
-
 @app.route("/health")
 def health():
     return Response("OK", status=200)

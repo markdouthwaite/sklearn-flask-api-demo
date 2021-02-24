@@ -7,6 +7,10 @@ import pandas as pd
 from sklearn.pipeline import Pipeline
 
 
+class InvalidPayloadError(Exception):
+    pass
+
+
 def create_predict_handler(
     path: str = os.getenv("MODEL_PATH", "data/pipeline.pkl"),
 ) -> Callable[[flask.Request], flask.Response]:
@@ -33,7 +37,11 @@ def create_predict_handler(
     def handler(request: flask.Request) -> Any:
         request_json = request.get_json()
         df = pd.DataFrame.from_records([request_json])
-        yh = model.predict(df)
+        try:
+            yh = model.predict(df)
+        except ValueError as e:
+            raise InvalidPayloadError(e)
+
         return flask.jsonify(dict(diagnosis=statuses[int(yh[0])]))
 
     return handler
